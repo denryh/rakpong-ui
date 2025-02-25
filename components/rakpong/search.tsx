@@ -2,9 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 
-export default function Search() {
+export default function Search({
+  onSearch,
+}: {
+  onSearch?: MouseEventHandler<HTMLButtonElement>;
+}) {
   const [searchValue, setSearchValue] = useState("");
 
   const [debouncedSearchValue, setDebouncedSearchValue] = useState("");
@@ -27,7 +31,10 @@ export default function Search() {
         value={searchValue}
         onChange={(event) => setSearchValue(event.target.value)}
       />
-      <Button className="font-bold">Search</Button>
+
+      <Button className="font-bold" onClick={onSearch}>
+        Search
+      </Button>
     </div>
   );
 }
